@@ -8,7 +8,7 @@ package superapp;
  *
  * @author Usuário do Windows
  */
-public class SuperApp {
+public class TelaRecuperacao {
 
     public static void main(String[] args) {
         System.out.println("Hello World!");
