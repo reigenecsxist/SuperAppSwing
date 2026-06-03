@@ -6,6 +6,7 @@ package superapp;
 
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
+import javax.swing.JSpinner;
 
 /**
  *
@@ -17,10 +18,10 @@ public class ItemMercado extends javax.swing.JPanel {
      * Creates new form ItemMercado
      */
     
-    public Mercado.item produto;
-    public Mercado.Carrinho carrinho;
+    public Item produto;
+    public Carrinho carrinho;
     
-    public ItemMercado(Mercado.item produto, Mercado.Carrinho carrinho) {
+    public ItemMercado(Item produto, Carrinho carrinho) {
         
         initComponents();
         this.produto = produto;
@@ -52,6 +53,12 @@ public class ItemMercado extends javax.swing.JPanel {
             labelImg.setText("Erro!");
         }      
     }
+
+    public JSpinner getSpinnerQtd() {
+        return spinnerQtd;
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

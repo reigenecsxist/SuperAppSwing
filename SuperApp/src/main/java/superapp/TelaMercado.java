@@ -12,11 +12,12 @@ import java.util.ArrayList;
  */
 public class TelaMercado extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaMercado.class.getName());
-
     /**
      * Creates new form TelaMercado2
      */
+    
+    Carrinho meuCarrinho = new Carrinho(null,0);
+    
     public TelaMercado() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -25,24 +26,24 @@ public class TelaMercado extends javax.swing.JFrame {
     
     public void inicializarMercado(){
         
-            ArrayList<superapp.Mercado.item> listaItens = new ArrayList<>();
+            ArrayList<superapp.Item> listaItens = new ArrayList<>();
         
-            listaItens.add(new Mercado.item("Cenoura", "Kg", 3.0, "/img/cenoura.png"));
-            listaItens.add(new Mercado.item("Arroz", "Pct", 20, "/img/arroz.jpeg"));
-            listaItens.add(new Mercado.item("Pimentão", "Kg", 4.5, "/img/pimentao.jpg"));
-            listaItens.add(new Mercado.item("Ovo", "Und", 0.75, "/img/ovo.jpg"));
-            listaItens.add(new Mercado.item("Carne", "Kg", 27.9, "/img/carne.jpg"));
-            listaItens.add(new Mercado.item("Óleo", "Und", 5.0, "/img/oleo.png"));
-            listaItens.add(new Mercado.item("Feijão", "Pct", 8.5, "/img/feijao.jpg"));
-            listaItens.add(new Mercado.item("Refrigerante", "Und", 9.0, "/img/refrigerantes.jpg"));
-            listaItens.add(new Mercado.item("Alho", "Kg", 3.0, "/img/alho.png"));
-            listaItens.add(new Mercado.item("Alface", "Und", 2.0, "/img/alface.jpeg"));
-            listaItens.add(new Mercado.item("Tomate", "Kg", 3.0, "/img/tomate.jpg"));
-            listaItens.add(new Mercado.item("Macarrão", "Pct", 2.5, "/img/macarrao.jpeg"));
+            listaItens.add(new Item("Cenoura", "Kg", 3.0, "/img/cenoura.png"));
+            listaItens.add(new Item("Arroz", "Pct", 20, "/img/arroz.jpeg"));
+            listaItens.add(new Item("Pimentão", "Kg", 4.5, "/img/pimentao.jpg"));
+            listaItens.add(new Item("Ovo", "Und", 0.75, "/img/ovo.jpg"));
+            listaItens.add(new Item("Carne", "Kg", 27.9, "/img/carne.jpg"));
+            listaItens.add(new Item("Óleo", "Und", 5.0, "/img/oleo.png"));
+            listaItens.add(new Item("Feijão", "Pct", 8.5, "/img/feijao.jpg"));
+            listaItens.add(new Item("Refrigerante", "Und", 9.0, "/img/refrigerantes.jpg"));
+            listaItens.add(new Item("Alho", "Kg", 3.0, "/img/alho.png"));
+            listaItens.add(new Item("Alface", "Und", 2.0, "/img/alface.jpeg"));
+            listaItens.add(new Item("Tomate", "Kg", 3.0, "/img/tomate.jpg"));
+            listaItens.add(new Item("Macarrão", "Pct", 2.5, "/img/macarrao.jpeg"));
         
             panelItens.removeAll();
             
-            for(Mercado.item item : listaItens){
+            for(Item item : listaItens){
                 ItemMercado itemVisual = new ItemMercado(item, null);
                 panelItens.add(itemVisual);
             }
@@ -84,6 +85,11 @@ public class TelaMercado extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Carrinho");
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -145,6 +151,12 @@ public class TelaMercado extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        // TODO add your handling code here:
+        
+        new TelaCarrinho(new Carrinho());
+    }//GEN-LAST:event_jLabel2MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -162,7 +174,6 @@ public class TelaMercado extends javax.swing.JFrame {
                 }
             }
         } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 

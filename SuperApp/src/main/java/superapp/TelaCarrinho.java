@@ -14,23 +14,19 @@ import java.util.ArrayList;
 public class TelaCarrinho extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaCarrinho.class.getName());
-
     /** Creates new form TelaCarrinho */
-    public TelaCarrinho() {
+    public TelaCarrinho(Carrinho carrinhoNovo) {
         initComponents();
         this.setLocationRelativeTo(null);
-        inicializarCarrinho();
-        
-        
+       
+        inicializarCarrinho(carrinhoNovo);
     }
     
-    public void inicializarCarrinho(Mercado.Carrinho carrinho){
-            Mercado.Carrinho carrinho;
-            Mercado.item produto;
+    public void inicializarCarrinho(Carrinho carrinho){
             panelItensCarrinho.removeAll();
             
-            for(Mercado.Carrinho item : carrinho.dentroDoCarrinho){
-                ItemCarrinho itemVisual = new ItemCarrinho(produto, carrinho);
+            for(Carrinho item : carrinho.dentroDoCarrinho){
+                ItemCarrinho itemVisual = new ItemCarrinho(item.item, carrinho);
                 panelItensCarrinho.add(itemVisual);
             }
             
@@ -76,7 +72,7 @@ public class TelaCarrinho extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 315, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 312, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(31, 31, 31))
             .addComponent(jScrollPane1)
@@ -110,30 +106,6 @@ public class TelaCarrinho extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new TelaCarrinho().setVisible(true));
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

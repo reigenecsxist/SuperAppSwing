@@ -16,10 +16,10 @@ public class ItemCarrinho extends javax.swing.JPanel {
      * Creates new form ItemCarrinho
      */
     
-    Mercado.item produto;
-    Mercado.Carrinho carrinho;
+    Item produto;
+    Carrinho carrinho;
     
-    public ItemCarrinho(Mercado.item produto, Mercado.Carrinho carrinho) {
+    public ItemCarrinho(Item produto, Carrinho carrinho) {
         initComponents();
         
         this.produto = produto;
