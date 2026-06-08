@@ -4,6 +4,9 @@
  */
 package superapp;
 
+import javax.swing.JOptionPane;
+import sistemabancario.*;
+
 /**
  *
  * @author Usuário do Windows
@@ -12,11 +15,16 @@ public class TelaLogin extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaLogin.class.getName());
 
+    sistemabancario.Conta conta;
+    
     /**
      * Creates new form TelaLogin
+     * @param conta
      */
-    public TelaLogin() {
+    public TelaLogin(sistemabancario.Conta conta) {
         initComponents();
+        jPanel2.requestFocusInWindow();
+        this.conta = conta;
     }
 
     /**
@@ -32,7 +40,6 @@ public class TelaLogin extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         campoNome = new javax.swing.JTextField();
         campoSenha = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -40,19 +47,17 @@ public class TelaLogin extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         botaoLogin = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-
-        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\Usuário do Windows\\Documents\\NetBeansProjects\\SuperApp\\src\\main\\png\\noun-user-13649.png")); // NOI18N
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login");
-        setAlwaysOnTop(true);
         setPreferredSize(new java.awt.Dimension(315, 400));
         setResizable(false);
         setSize(new java.awt.Dimension(315, 400));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setLayout(new java.awt.GridLayout());
+        jPanel1.setLayout(new java.awt.GridLayout(1, 0));
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(648, 0, -1, 396));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -66,36 +71,41 @@ public class TelaLogin extends javax.swing.JFrame {
         jLabel1.setText("Login");
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 110, 200, 40));
 
-        jButton1.setBackground(new java.awt.Color(0, 0, 0));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Recuperar conta/senha");
-        jButton1.addActionListener(this::jButton1ActionPerformed);
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 340, -1, -1));
-
         campoNome.setBackground(new java.awt.Color(255, 255, 255));
         campoNome.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        campoNome.setForeground(new java.awt.Color(0, 0, 0));
+        campoNome.setForeground(java.awt.Color.gray);
         campoNome.setText("Nome");
         campoNome.setToolTipText("");
-        jPanel2.add(campoNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 160, 190, -1));
+        campoNome.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                campoNomeFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                campoNomeFocusLost(evt);
+            }
+        });
+        jPanel2.add(campoNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 160, 200, -1));
 
         campoSenha.setBackground(new java.awt.Color(255, 255, 255));
         campoSenha.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        campoSenha.setForeground(new java.awt.Color(0, 0, 0));
+        campoSenha.setForeground(java.awt.Color.gray);
         campoSenha.setText("Senha");
-        jPanel2.add(campoSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 200, 190, -1));
+        campoSenha.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                campoSenhaFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                campoSenhaFocusLost(evt);
+            }
+        });
+        jPanel2.add(campoSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, 200, -1));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Banco GMM");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, 200, 40));
-
-        jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\Usuário do Windows\\Documents\\NetBeansProjects\\SuperApp\\src\\main\\png\\noun-user-13649.png")); // NOI18N
+        jLabel2.setText("Mercadinho do Jajá");
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 290, 80));
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, -1, 20));
-
-        jLabel6.setIcon(new javax.swing.ImageIcon("C:\\Users\\Usuário do Windows\\Documents\\NetBeansProjects\\SuperApp\\src\\main\\png\\noun-key-5633618.png")); // NOI18N
         jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, -1, 40));
 
         botaoLogin.setBackground(new java.awt.Color(0, 0, 0));
@@ -110,9 +120,15 @@ public class TelaLogin extends javax.swing.JFrame {
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Criar conta");
         jButton2.addActionListener(this::jButton2ActionPerformed);
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 310, 100, -1));
+        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 270, 110, -1));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 400));
+        jLabel4.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("Banco GMM");
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 180, 80));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 370));
 
         pack();
         setLocationRelativeTo(null);
@@ -120,15 +136,62 @@ public class TelaLogin extends javax.swing.JFrame {
 
     private void botaoLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoLoginActionPerformed
         // TODO add your handling code here:
+        String nome = campoNome.getText().toLowerCase();
+        String senha = campoSenha.getText();
+        
+        for(sistemabancario.Conta ct : conta.contas){
+            if(nome.equals(ct.nomeMeliante)){
+                if(senha.equals(ct.senha)){
+                    TelaMercado tm = new TelaMercado(ct, new sistemabancario.Transacao());
+                    tm.setVisible(true);
+                    this.dispose();
+                }
+                else
+                    JOptionPane.showMessageDialog(null, "Senha inválida!");
+            }
+            else
+                JOptionPane.showMessageDialog(null, "Usuário não encontrado");
+        }
     }//GEN-LAST:event_botaoLoginActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        TelaCriarConta tcc = new TelaCriarConta();
+        tcc.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void campoNomeFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoNomeFocusGained
+        // TODO add your handling code here:
+        if (campoNome.getText().equals("Nome")) {
+            campoNome.setText("");
+            campoNome.setForeground(java.awt.Color.BLACK);
+        }
+    }//GEN-LAST:event_campoNomeFocusGained
+
+    private void campoNomeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoNomeFocusLost
+        // TODO add your handling code here:,
+        if (campoNome.getText().isEmpty()) {
+            campoNome.setForeground(java.awt.Color.GRAY);
+            campoNome.setText("Nome");
+        }
+    }//GEN-LAST:event_campoNomeFocusLost
+
+    private void campoSenhaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoSenhaFocusGained
+        // TODO add your handling code here:
+        if (campoSenha.getText().equals("Senha")) {
+            campoSenha.setText("");
+            campoSenha.setForeground(java.awt.Color.BLACK);
+        }
+    }//GEN-LAST:event_campoSenhaFocusGained
+
+    private void campoSenhaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoSenhaFocusLost
+        // TODO add your handling code here:
+        if (campoNome.getText().isEmpty()) {
+            campoNome.setForeground(java.awt.Color.GRAY);
+            campoNome.setText("Senha");
+        }
+    }//GEN-LAST:event_campoSenhaFocusLost
 
     /**
      * @param args the command line arguments
@@ -152,18 +215,18 @@ public class TelaLogin extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new TelaLogin().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new TelaLogin(new Conta()).setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoLogin;
     public javax.swing.JTextField campoNome;
     public javax.swing.JTextField campoSenha;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;

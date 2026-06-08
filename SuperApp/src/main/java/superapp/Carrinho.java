@@ -5,37 +5,29 @@
 package superapp;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
  * @author Gabriel de Moura
  */
 public class Carrinho {
-     
-        ArrayList<Carrinho> dentroDoCarrinho = new ArrayList<>();
-        int quantItens;
-        int quantTotalItens = 0;
-        double valorTotalItens = 0;
-        Item item;
+    //Vou usar hash pra não precisar de um objeto intermediário só pq preciso pegar o objeto e a quantidade
+    HashMap<Item, Integer> meuCarrinho = new HashMap<>();
+    int quantItens;
+    int quantTotalItens = 0;
+    double valorTotalItens = 0;
+    Item item;
+    
+    public Carrinho(){}
 
-        public Carrinho(Item item, int quantidade) {
-            this.quantItens = quantItens;
-            this.item = item;
-        }
-        public Carrinho(){
-            quantTotalItens = 0;
-            valorTotalItens = 0;
-        }
-        
+    public Carrinho(Item item, int quantidade) {
+        this.quantItens = quantItens;
+        this.item = item;
+    }
 
-        public int getQuantItens() {
-            return quantItens;
-        }
-        
-        public void adicionar(Item item, int quantidade){
-            dentroDoCarrinho.add(new Carrinho(item, quantidade));
-            quantTotalItens++;
-            valorTotalItens+=item.getPreco();
-        }
+    public int getQuantItens() {
+        return quantItens;
+    }
 }
 

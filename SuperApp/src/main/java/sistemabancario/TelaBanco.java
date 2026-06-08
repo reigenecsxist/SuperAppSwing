@@ -4,6 +4,8 @@
  */
 package sistemabancario;
 
+import java.util.Locale;
+
 /**
  *
  * @author Usuário do Windows
@@ -12,12 +14,25 @@ public class TelaBanco extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaBanco.class.getName());
 
+    sistemabancario.Conta conta;
+    sistemabancario.Transacao transacao;
+    
     /**
      * Creates new form TelaBanco
      */
-    public TelaBanco() {
+    public TelaBanco(Conta ct, Transacao tc) {
         initComponents();
+        this.conta = ct;
+        this.transacao = tc;
+        
+        labelNome.setText("Olá, "+ct.nomeMeliante.substring(0,1).toUpperCase()+ct.nomeMeliante.substring(1).toLowerCase());
+        labelSaldo.setText("Saldo: "+String.format("%.2f", ct.saldo));
+        
+        this.repaint();
+        this.revalidate();
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -30,71 +45,136 @@ public class TelaBanco extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        labelNome = new javax.swing.JLabel();
+        labelSaldo = new javax.swing.JLabel();
+        btnEscondeSaldo = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        btnSaque = new javax.swing.JButton();
+        btnExtrato = new javax.swing.JButton();
+        btnDeposito = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        jPanel2.setBackground(new java.awt.Color(0, 153, 255));
 
-        jTextField1.setBackground(new java.awt.Color(255, 255, 255));
-        jTextField1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(0, 0, 0));
-        jTextField1.setText("Olá, ");
-        jTextField1.setBorder(null);
-        jTextField1.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        jTextField1.setEnabled(false);
-        jTextField1.setFocusable(false);
-        jTextField1.addActionListener(this::jTextField1ActionPerformed);
+        labelNome.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        labelNome.setForeground(new java.awt.Color(255, 255, 255));
+        labelNome.setText("Olá, ");
 
-        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        labelSaldo.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        labelSaldo.setForeground(new java.awt.Color(255, 255, 255));
+        labelSaldo.setText("Saldo: ");
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 240, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 78, Short.MAX_VALUE)
-        );
+        btnEscondeSaldo.setBackground(new java.awt.Color(51, 153, 255));
+        btnEscondeSaldo.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+        btnEscondeSaldo.setForeground(new java.awt.Color(255, 255, 255));
+        btnEscondeSaldo.setText("Esconder saldo");
+        btnEscondeSaldo.setBorder(null);
+        btnEscondeSaldo.addActionListener(this::btnEscondeSaldoActionPerformed);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 163, Short.MAX_VALUE)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addComponent(labelNome)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(labelSaldo)
+                        .addGap(189, 189, 189))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(btnEscondeSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(72, 72, 72))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 1, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelNome)
+                    .addComponent(labelSaldo))
+                .addContainerGap(37, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnEscondeSaldo, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14))
+        );
+
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("O que deseja fazer?");
+
+        btnSaque.setBackground(new java.awt.Color(255, 255, 255));
+        btnSaque.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnSaque.setForeground(new java.awt.Color(0, 0, 0));
+        btnSaque.setText("Saque");
+        btnSaque.addActionListener(this::btnSaqueActionPerformed);
+
+        btnExtrato.setBackground(new java.awt.Color(255, 255, 255));
+        btnExtrato.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnExtrato.setForeground(new java.awt.Color(0, 0, 0));
+        btnExtrato.setText("Ver extrato");
+        btnExtrato.addActionListener(this::btnExtratoActionPerformed);
+
+        btnDeposito.setBackground(new java.awt.Color(255, 255, 255));
+        btnDeposito.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnDeposito.setForeground(new java.awt.Color(0, 0, 0));
+        btnDeposito.setText("Depósito");
+        btnDeposito.addActionListener(this::btnDepositoActionPerformed);
+
+        jPanel3.setBackground(new java.awt.Color(0, 153, 255));
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 454, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 44, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jLabel1))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnExtrato, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnSaque, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE))
+                        .addGap(72, 72, 72)
+                        .addComponent(btnDeposito, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(422, Short.MAX_VALUE))
+                .addGap(29, 29, 29)
+                .addComponent(jLabel1)
+                .addGap(39, 39, 39)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSaque)
+                    .addComponent(btnDeposito))
+                .addGap(41, 41, 41)
+                .addComponent(btnExtrato)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -110,40 +190,56 @@ public class TelaBanco extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    SistemaBancarioModular sbm;
+    private void btnSaqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaqueActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+        sbm.sacar(conta, transacao);
+    }//GEN-LAST:event_btnSaqueActionPerformed
+
+    boolean saldoEscondido = false;
+    
+    private void btnEscondeSaldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEscondeSaldoActionPerformed
+        // TODO add your handling code here:
+        if(!saldoEscondido){
+            labelSaldo.setText("Saldo: ****");
+            btnEscondeSaldo.setText("Mostrar saldo");
+            this.repaint();
+            this.revalidate();
+        }
+        else{
+            labelSaldo.setText("Saldo: "+String.format("%.2f", conta.saldo));
+            btnEscondeSaldo.setText("Esconder saldo");
+            this.repaint();
+            this.revalidate();
+        }
+        
+    }//GEN-LAST:event_btnEscondeSaldoActionPerformed
+
+    private void btnDepositoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDepositoActionPerformed
+        // TODO add your handling code here:
+        sbm.depositar(conta, transacao);
+    }//GEN-LAST:event_btnDepositoActionPerformed
+
+    private void btnExtratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExtratoActionPerformed
+        // TODO add your handling code here:
+        TelaExtrato te = new TelaExtrato(conta);
+        te.setVisible(true);
+    }//GEN-LAST:event_btnExtratoActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new TelaBanco().setVisible(true));
-    }
-
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDeposito;
+    private javax.swing.JButton btnEscondeSaldo;
+    private javax.swing.JButton btnExtrato;
+    private javax.swing.JButton btnSaque;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel labelNome;
+    private javax.swing.JLabel labelSaldo;
     // End of variables declaration//GEN-END:variables
 }

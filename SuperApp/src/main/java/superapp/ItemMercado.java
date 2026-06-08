@@ -5,7 +5,10 @@
 package superapp;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
 
 /**
@@ -20,7 +23,7 @@ public class ItemMercado extends javax.swing.JPanel {
     
     public Item produto;
     public Carrinho carrinho;
-    
+        
     public ItemMercado(Item produto, Carrinho carrinho) {
         
         initComponents();
@@ -57,9 +60,6 @@ public class ItemMercado extends javax.swing.JPanel {
     public JSpinner getSpinnerQtd() {
         return spinnerQtd;
     }
-    
-    
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -139,11 +139,23 @@ public class ItemMercado extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    
     private void botaoAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAddActionPerformed
         // TODO add your handling code here:
         int qtd = (int) spinnerQtd.getValue();
         
-        carrinho.adicionar(produto, qtd);
+        //se tiver no mapa, adiciona a quantidade, se não tiver, adiciona o item novo
+        if(carrinho.meuCarrinho.containsKey(produto)){
+            int qtdAntiga = carrinho.meuCarrinho.get(produto);
+            carrinho.meuCarrinho.put(produto, qtdAntiga+qtd);
+        }
+        else
+            carrinho.meuCarrinho.put(produto, qtd);                
+        
+        JOptionPane.showMessageDialog(null, "Produto(s) adicionado(s) ao carrinho!");
+        carrinho.quantTotalItens+=qtd;
+        carrinho.valorTotalItens+=(produto.getPreco()*qtd);
     }//GEN-LAST:event_botaoAddActionPerformed
 
 

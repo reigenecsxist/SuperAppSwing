@@ -5,6 +5,7 @@
 package superapp;
 
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,17 +19,21 @@ public class ItemCarrinho extends javax.swing.JPanel {
     
     Item produto;
     Carrinho carrinho;
+    TelaCarrinho telaCarrinho;
     
-    public ItemCarrinho(Item produto, Carrinho carrinho) {
+    public ItemCarrinho(Item produto, Carrinho carrinho, TelaCarrinho telaCarrinho) {
         initComponents();
         
         this.produto = produto;
         this.carrinho = carrinho;
+        this.telaCarrinho = telaCarrinho;
+        
+        int quantItens = carrinho.meuCarrinho.get(produto);
         
         labelNomeCarrinho.setText(produto.getNome());
-        labelQtdCarrinho.setText(carrinho.getQuantItens()+" "+produto.getUnidade());
-        labelPrecoUn.setText("R$"+String.format("%.2f", produto.getPreco()));
-        labelPrecoTotal.setText("R$"+(produto.getPreco()*carrinho.quantItens));
+        labelQtdCarrinho.setText("Quantidade: "+quantItens+" "+produto.getUnidade());
+        labelPrecoUn.setText("Valor un.: R$"+String.format("%.2f", produto.getPreco()));
+        labelPrecoTotal.setText("Total: R$"+String.format("%.2f", produto.getPreco()*quantItens));
         
         try{
             java.io.File arquivoImagem = new java.io.File("src/main/java" + produto.getImg());
@@ -63,15 +68,20 @@ public class ItemCarrinho extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
+        jSpinner1 = new javax.swing.JSpinner();
         labelImgCarrinho = new javax.swing.JLabel();
         labelNomeCarrinho = new javax.swing.JLabel();
         labelQtdCarrinho = new javax.swing.JLabel();
         labelPrecoUn = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        btnRemover = new javax.swing.JLabel();
         labelPrecoTotal = new javax.swing.JLabel();
+        spinnerQtdRemover = new javax.swing.JSpinner();
+        btnRemover = new javax.swing.JButton();
+
+        jButton1.setText("jButton1");
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setPreferredSize(new java.awt.Dimension(510, 102));
         setLayout(null);
 
         labelImgCarrinho.setForeground(new java.awt.Color(0, 0, 0));
@@ -84,60 +94,71 @@ public class ItemCarrinho extends javax.swing.JPanel {
         labelNomeCarrinho.setForeground(new java.awt.Color(0, 0, 0));
         labelNomeCarrinho.setText("Nome");
         add(labelNomeCarrinho);
-        labelNomeCarrinho.setBounds(90, 10, 69, 32);
+        labelNomeCarrinho.setBounds(90, 10, 280, 32);
 
         labelQtdCarrinho.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         labelQtdCarrinho.setForeground(new java.awt.Color(0, 0, 0));
         labelQtdCarrinho.setText("Quantidade");
         add(labelQtdCarrinho);
-        labelQtdCarrinho.setBounds(90, 70, 64, 16);
+        labelQtdCarrinho.setBounds(90, 70, 100, 16);
 
         labelPrecoUn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         labelPrecoUn.setForeground(new java.awt.Color(0, 0, 0));
         labelPrecoUn.setText("Preço un.");
         add(labelPrecoUn);
-        labelPrecoUn.setBounds(180, 70, 52, 16);
+        labelPrecoUn.setBounds(220, 70, 130, 16);
 
-        jPanel1.setBackground(new java.awt.Color(255, 51, 51));
-
-        btnRemover.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        btnRemover.setText("Remover");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(26, Short.MAX_VALUE)
-                .addComponent(btnRemover)
-                .addGap(23, 23, 23))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addComponent(btnRemover)
-                .addContainerGap(43, Short.MAX_VALUE))
-        );
-
-        add(jPanel1);
-        jPanel1.setBounds(409, 0, 110, 104);
-
-        labelPrecoTotal.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        labelPrecoTotal.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         labelPrecoTotal.setForeground(new java.awt.Color(0, 0, 0));
         labelPrecoTotal.setText("jLabel5");
         add(labelPrecoTotal);
-        labelPrecoTotal.setBounds(290, 40, 60, 25);
+        labelPrecoTotal.setBounds(230, 30, 160, 22);
+
+        spinnerQtdRemover.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
+        add(spinnerQtdRemover);
+        spinnerQtdRemover.setBounds(430, 40, 70, 22);
+
+        btnRemover.setBackground(new java.awt.Color(255, 0, 0));
+        btnRemover.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnRemover.setForeground(new java.awt.Color(255, 255, 255));
+        btnRemover.setText("Remover");
+        btnRemover.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
+        btnRemover.addActionListener(this::btnRemoverActionPerformed);
+        add(btnRemover);
+        btnRemover.setBounds(410, 0, 110, 100);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
+        // TODO add your handling code here:
+        int qtdRemover = (int) spinnerQtdRemover.getValue();
+        int qtdItem = carrinho.meuCarrinho.get(produto);
+        
+        if(qtdItem<=qtdRemover){
+            carrinho.meuCarrinho.remove(produto);
+            JOptionPane.showMessageDialog(null, "Produto removido do carrinho!");
+            carrinho.quantTotalItens-=qtdItem;
+            carrinho.valorTotalItens-=(qtdItem*produto.preco);
+        }
+        else{
+            carrinho.meuCarrinho.put(produto, qtdItem-qtdRemover);
+            JOptionPane.showMessageDialog(null, "Unidades removidas do carrinho!");
+            carrinho.quantTotalItens-=qtdRemover;
+            carrinho.valorTotalItens-=(qtdRemover*produto.preco);
+        }
+        
+        telaCarrinho.inicializarCarrinho(carrinho);
+    }//GEN-LAST:event_btnRemoverActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel btnRemover;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton btnRemover;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JLabel labelImgCarrinho;
     private javax.swing.JLabel labelNomeCarrinho;
     private javax.swing.JLabel labelPrecoTotal;
     private javax.swing.JLabel labelPrecoUn;
     private javax.swing.JLabel labelQtdCarrinho;
+    private javax.swing.JSpinner spinnerQtdRemover;
     // End of variables declaration//GEN-END:variables
 }
