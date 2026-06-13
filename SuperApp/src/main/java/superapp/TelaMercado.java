@@ -80,6 +80,7 @@ public class TelaMercado extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Mercadinho");
         setPreferredSize(new java.awt.Dimension(870, 635));
+        setResizable(false);
         getContentPane().setLayout(null);
 
         jPanel3.setBackground(new java.awt.Color(255, 51, 102));

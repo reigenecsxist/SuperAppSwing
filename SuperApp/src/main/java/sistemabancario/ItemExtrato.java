@@ -75,6 +75,7 @@ public class ItemExtrato extends javax.swing.JPanel {
         );
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setMaximumSize(new java.awt.Dimension(499, 48));
 
         labelCodigo.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         labelCodigo.setForeground(new java.awt.Color(0, 0, 0));

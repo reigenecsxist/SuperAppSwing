@@ -15,7 +15,7 @@ import javax.swing.Timer;
 public class TelaCriarConta extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(TelaCriarConta.class.getName());
-    
+    sistemabancario.Conta conta = new sistemabancario.Conta();
     
     /**
      * Creates new form TelaCriarConta
@@ -165,9 +165,10 @@ public class TelaCriarConta extends javax.swing.JFrame {
             enrole.setRepeats(false);
             enrole.start();
         }
+        else if(nome.isBlank())
+            JOptionPane.showMessageDialog(null, "Nome inválido!");
         else{
-            sistemabancario.Conta conta = new sistemabancario.Conta(senha, nome, 0);
-            conta.contas.add(conta);
+            conta.contas.add(new sistemabancario.Conta(senha, nome, 0));
             JOptionPane.showMessageDialog(null, "Conta criada com sucesso!");
             TelaLogin tl = new TelaLogin(conta);
             tl.setVisible(true);

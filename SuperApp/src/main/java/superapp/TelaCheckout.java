@@ -32,10 +32,10 @@ public class TelaCheckout extends javax.swing.JFrame {
         labelValorCompra.setText("R$"+String.format("%.2f", carrinho.valorTotalItens));
         labelSaldo.setText("R$"+String.format("%.2f", conta.saldo));
         
-        if(carrinho.valorTotalItens-conta.saldo<0)
+        if(conta.saldo-carrinho.valorTotalItens<0)
             labelSaldoSobra.setText("Saldo insuficiente.");
         else{
-            labelSaldoSobra.setText("R$"+String.format("%.2f", carrinho.valorTotalItens));
+            labelSaldoSobra.setText("R$"+String.format("%.2f", conta.saldo-carrinho.valorTotalItens));
         }
     }
 
@@ -62,7 +62,8 @@ public class TelaCheckout extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         labelSaldo = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setLayout(null);
 
@@ -79,7 +80,7 @@ public class TelaCheckout extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
-                .addContainerGap(202, Short.MAX_VALUE))
+                .addContainerGap(302, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -90,7 +91,7 @@ public class TelaCheckout extends javax.swing.JFrame {
         );
 
         jPanel1.add(jPanel2);
-        jPanel2.setBounds(0, 0, 300, 63);
+        jPanel2.setBounds(0, 0, 400, 63);
 
         jPanel4.setBackground(new java.awt.Color(255, 0, 102));
 
@@ -98,7 +99,7 @@ public class TelaCheckout extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 400, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -106,7 +107,7 @@ public class TelaCheckout extends javax.swing.JFrame {
         );
 
         jPanel1.add(jPanel4);
-        jPanel4.setBounds(0, 270, 300, 40);
+        jPanel4.setBounds(0, 270, 400, 40);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setLayout(null);
@@ -116,7 +117,7 @@ public class TelaCheckout extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Valor da compra:");
         jPanel3.add(jLabel2);
-        jLabel2.setBounds(52, 33, 117, 20);
+        jLabel2.setBounds(70, 40, 140, 20);
 
         btnComprar.setBackground(new java.awt.Color(0, 102, 51));
         btnComprar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -124,38 +125,38 @@ public class TelaCheckout extends javax.swing.JFrame {
         btnComprar.setText("Finalizar compra");
         btnComprar.addActionListener(this::btnComprarActionPerformed);
         jPanel3.add(btnComprar);
-        btnComprar.setBounds(66, 160, 142, 27);
+        btnComprar.setBounds(130, 170, 142, 27);
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Saldo na conta:");
         jPanel3.add(jLabel4);
-        jLabel4.setBounds(66, 59, 103, 20);
+        jLabel4.setBounds(80, 70, 140, 20);
 
         labelValorCompra.setForeground(new java.awt.Color(0, 0, 0));
         labelValorCompra.setText("jLabel5");
         jPanel3.add(labelValorCompra);
-        labelValorCompra.setBounds(190, 36, 37, 20);
+        labelValorCompra.setBounds(220, 40, 170, 20);
 
         labelSaldoSobra.setForeground(new java.awt.Color(0, 0, 0));
         labelSaldoSobra.setText("jLabel5");
         jPanel3.add(labelSaldoSobra);
-        labelSaldoSobra.setBounds(190, 90, 60, 16);
+        labelSaldoSobra.setBounds(220, 100, 180, 16);
         jPanel3.add(jSeparator1);
-        jSeparator1.setBounds(32, 85, 220, 10);
+        jSeparator1.setBounds(30, 90, 250, 10);
 
         jLabel5.setBackground(new java.awt.Color(255, 255, 255));
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Saldo após a compra: ");
         jPanel3.add(jLabel5);
-        jLabel5.setBounds(20, 90, 150, 20);
+        jLabel5.setBounds(40, 100, 170, 20);
 
         labelSaldo.setForeground(new java.awt.Color(0, 0, 0));
         labelSaldo.setText("jLabel5");
         jPanel3.add(labelSaldo);
-        labelSaldo.setBounds(190, 60, 37, 20);
+        labelSaldo.setBounds(220, 70, 170, 20);
 
         jPanel1.add(jPanel3);
         jPanel3.setBounds(0, 60, 400, 220);
@@ -164,7 +165,7 @@ public class TelaCheckout extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 392, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,17 +173,20 @@ public class TelaCheckout extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
         // TODO add your handling code here:
-        if(carrinho.valorTotalItens-conta.saldo>=0){
+        if(conta.saldo-carrinho.valorTotalItens>=0){
             conta.saldo-=carrinho.valorTotalItens;
             carrinho.meuCarrinho.clear();
-            transacao.extrato.add(new sistemabancario.Transacao(transacao.codigo++, "Compra", carrinho.valorTotalItens, conta.senha, conta.nomeMeliante, conta.saldo));
+            conta.extrato.add(new sistemabancario.Transacao(transacao.codigo++, "Compra", carrinho.valorTotalItens, conta.senha, conta.nomeMeliante, conta.saldo));
             JOptionPane.showMessageDialog(null, "Compra concluída!");
             this.dispose();
         }
+        else
+            JOptionPane.showMessageDialog(null, "Saldo insuficiente!");
     }//GEN-LAST:event_btnComprarActionPerformed
 
     /**

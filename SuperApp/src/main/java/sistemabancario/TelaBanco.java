@@ -4,7 +4,6 @@
  */
 package sistemabancario;
 
-import java.util.Locale;
 
 /**
  *
@@ -31,9 +30,6 @@ public class TelaBanco extends javax.swing.JFrame {
         this.repaint();
         this.revalidate();
     }
-    
-    
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -55,6 +51,7 @@ public class TelaBanco extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -189,11 +186,14 @@ public class TelaBanco extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-    SistemaBancarioModular sbm;
+    
+    sistemabancario.SistemaBancarioModular sbm = new SistemaBancarioModular();
     private void btnSaqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaqueActionPerformed
         // TODO add your handling code here:
         sbm.sacar(conta, transacao);
+        labelSaldo.setText("Saldo: "+String.format("%.2f", conta.saldo));
     }//GEN-LAST:event_btnSaqueActionPerformed
 
     boolean saldoEscondido = false;
@@ -201,12 +201,14 @@ public class TelaBanco extends javax.swing.JFrame {
     private void btnEscondeSaldoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEscondeSaldoActionPerformed
         // TODO add your handling code here:
         if(!saldoEscondido){
+            saldoEscondido = true;
             labelSaldo.setText("Saldo: ****");
             btnEscondeSaldo.setText("Mostrar saldo");
             this.repaint();
             this.revalidate();
         }
         else{
+            saldoEscondido = false;
             labelSaldo.setText("Saldo: "+String.format("%.2f", conta.saldo));
             btnEscondeSaldo.setText("Esconder saldo");
             this.repaint();
@@ -218,6 +220,7 @@ public class TelaBanco extends javax.swing.JFrame {
     private void btnDepositoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDepositoActionPerformed
         // TODO add your handling code here:
         sbm.depositar(conta, transacao);
+        labelSaldo.setText("Saldo: "+String.format("%.2f", conta.saldo));
     }//GEN-LAST:event_btnDepositoActionPerformed
 
     private void btnExtratoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExtratoActionPerformed

@@ -45,7 +45,9 @@ public class TelaExtrato extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         panelExtrato = new javax.swing.JPanel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(490, 533));
+        setResizable(false);
         getContentPane().setLayout(null);
 
         jPanel1.setBackground(new java.awt.Color(0, 153, 255));
@@ -89,13 +91,14 @@ public class TelaExtrato extends javax.swing.JFrame {
         getContentPane().add(jPanel2);
         jPanel2.setBounds(0, 490, 490, 43);
 
-        panelExtrato.setLayout(new java.awt.GridLayout(0, 1, 0, 5));
+        panelExtrato.setLayout(new java.awt.GridLayout(0, 1, 5, 5));
         jScrollPane1.setViewportView(panelExtrato);
 
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(0, 70, 490, 427);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**

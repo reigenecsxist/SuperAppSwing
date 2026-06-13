@@ -11,7 +11,10 @@ import javax.swing.JOptionPane;
  * @author Usuário do Windows
  */
 public class SistemaBancarioModular {
-        
+
+    public SistemaBancarioModular() {
+    }
+    
     public void depositar(Conta conta, Transacao transacao){
         double valorDeposito = Float.parseFloat(JOptionPane.showInputDialog("Qual valor deseja depositar?"));
         conta.saldo += valorDeposito;
@@ -20,6 +23,7 @@ public class SistemaBancarioModular {
         conta.extrato.add(trDeposito);
         
         JOptionPane.showMessageDialog(null, "Depósito realizado com sucesso!");
+        
     }
     
     public void sacar(Conta conta, Transacao transacao){

@@ -25,6 +25,7 @@ public class TelaLogin extends javax.swing.JFrame {
         initComponents();
         jPanel2.requestFocusInWindow();
         this.conta = conta;
+        conta.contas.add(new Conta("1234", "gabriel", 500));
     }
 
     /**
@@ -41,13 +42,13 @@ public class TelaLogin extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         campoNome = new javax.swing.JTextField();
-        campoSenha = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         botaoLogin = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        campoSenha = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login");
@@ -86,20 +87,6 @@ public class TelaLogin extends javax.swing.JFrame {
         });
         jPanel2.add(campoNome, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 160, 200, -1));
 
-        campoSenha.setBackground(new java.awt.Color(255, 255, 255));
-        campoSenha.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        campoSenha.setForeground(java.awt.Color.gray);
-        campoSenha.setText("Senha");
-        campoSenha.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                campoSenhaFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                campoSenhaFocusLost(evt);
-            }
-        });
-        jPanel2.add(campoSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, 200, -1));
-
         jLabel2.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -113,20 +100,33 @@ public class TelaLogin extends javax.swing.JFrame {
         botaoLogin.setForeground(new java.awt.Color(255, 255, 255));
         botaoLogin.setText("Login");
         botaoLogin.addActionListener(this::botaoLoginActionPerformed);
-        jPanel2.add(botaoLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 240, -1, -1));
+        jPanel2.add(botaoLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 250, 110, -1));
 
         jButton2.setBackground(new java.awt.Color(0, 0, 0));
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Criar conta");
         jButton2.addActionListener(this::jButton2ActionPerformed);
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 270, 110, -1));
+        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 280, 110, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Banco GMM");
         jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, 180, 80));
+
+        campoSenha.setBackground(new java.awt.Color(255, 255, 255));
+        campoSenha.setForeground(new java.awt.Color(102, 102, 102));
+        campoSenha.setText("senha");
+        campoSenha.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                campoSenhaFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                campoSenhaFocusLost(evt);
+            }
+        });
+        jPanel2.add(campoSenha, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 200, 200, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 370));
 
@@ -137,7 +137,8 @@ public class TelaLogin extends javax.swing.JFrame {
     private void botaoLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoLoginActionPerformed
         // TODO add your handling code here:
         String nome = campoNome.getText().toLowerCase();
-        String senha = campoSenha.getText();
+        char[] senhaChar = campoSenha.getPassword();
+        String senha = new String(senhaChar);
         
         for(sistemabancario.Conta ct : conta.contas){
             if(nome.equals(ct.nomeMeliante)){
@@ -147,9 +148,11 @@ public class TelaLogin extends javax.swing.JFrame {
                     this.dispose();
                 }
                 else
-                    JOptionPane.showMessageDialog(null, "Senha inválida!");
+                    JOptionPane.showMessageDialog(null, "Senha incorreta!");
             }
-            else
+            else if(nome==null)
+                JOptionPane.showMessageDialog(null, "Nome inválido!");
+            else if(conta.contas.indexOf(ct)==conta.contas.lastIndexOf(ct)&&!nome.equals(ct.nomeMeliante))
                 JOptionPane.showMessageDialog(null, "Usuário não encontrado");
         }
     }//GEN-LAST:event_botaoLoginActionPerformed
@@ -177,9 +180,13 @@ public class TelaLogin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_campoNomeFocusLost
 
+    
+    
     private void campoSenhaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoSenhaFocusGained
         // TODO add your handling code here:
-        if (campoSenha.getText().equals("Senha")) {
+        char[] senha = campoSenha.getPassword();
+        String senhaDec = new String(senha);
+        if (senhaDec.equals("senha")) {
             campoSenha.setText("");
             campoSenha.setForeground(java.awt.Color.BLACK);
         }
@@ -187,9 +194,11 @@ public class TelaLogin extends javax.swing.JFrame {
 
     private void campoSenhaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoSenhaFocusLost
         // TODO add your handling code here:
-        if (campoNome.getText().isEmpty()) {
-            campoNome.setForeground(java.awt.Color.GRAY);
-            campoNome.setText("Senha");
+        char[] senha = campoSenha.getPassword();
+        String senhaDec = new String(senha);
+        if (senhaDec.isBlank()) {
+            campoSenha.setForeground(java.awt.Color.GRAY);
+            campoSenha.setText("senha");
         }
     }//GEN-LAST:event_campoSenhaFocusLost
 
@@ -221,7 +230,7 @@ public class TelaLogin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoLogin;
     public javax.swing.JTextField campoNome;
-    public javax.swing.JTextField campoSenha;
+    private javax.swing.JPasswordField campoSenha;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
