@@ -152,8 +152,7 @@ public class TelaLogin extends javax.swing.JFrame {
             }
             else if(nome==null)
                 JOptionPane.showMessageDialog(null, "Nome inválido!");
-            else if(conta.contas.indexOf(ct)==conta.contas.lastIndexOf(ct)&&!nome.equals(ct.nomeMeliante))
-                JOptionPane.showMessageDialog(null, "Usuário não encontrado");
+            
         }
     }//GEN-LAST:event_botaoLoginActionPerformed
 

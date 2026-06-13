@@ -83,18 +83,18 @@ public class TelaCriarConta extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Senha:");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(91, 122, 40, 20);
+        jLabel2.setBounds(81, 122, 50, 20);
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Nome do titular:");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(31, 82, 100, 20);
+        jLabel3.setBounds(20, 80, 120, 20);
 
         campoCriacaoNome.setBackground(new java.awt.Color(255, 255, 255));
         campoCriacaoNome.setForeground(new java.awt.Color(0, 0, 0));
         jPanel1.add(campoCriacaoNome);
-        campoCriacaoNome.setBounds(137, 82, 144, 22);
+        campoCriacaoNome.setBounds(140, 80, 150, 26);
 
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("A senha deve ser  ");
@@ -113,7 +113,7 @@ public class TelaCriarConta extends javax.swing.JFrame {
         jButton1.setText("Criar");
         jButton1.addActionListener(this::jButton1ActionPerformed);
         jPanel1.add(jButton1);
-        jButton1.setBounds(150, 210, 72, 27);
+        jButton1.setBounds(150, 210, 76, 31);
 
         labelNum.setForeground(new java.awt.Color(0, 0, 0));
         labelNum.setText("numérica");
@@ -128,7 +128,7 @@ public class TelaCriarConta extends javax.swing.JFrame {
         campoCriacaoSenha.setBackground(new java.awt.Color(255, 255, 255));
         campoCriacaoSenha.setForeground(new java.awt.Color(0, 0, 0));
         jPanel1.add(campoCriacaoSenha);
-        campoCriacaoSenha.setBounds(140, 120, 140, 22);
+        campoCriacaoSenha.setBounds(140, 120, 150, 26);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
