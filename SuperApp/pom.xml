@@ -24,4 +24,5 @@
         <maven.compiler.release>25</maven.compiler.release>
         <exec.mainClass>com.mycompany.superapp.SuperApp</exec.mainClass>
     </properties>
+    <name>SuperApp</name>
 </project>

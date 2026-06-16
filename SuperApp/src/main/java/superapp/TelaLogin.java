@@ -4,6 +4,7 @@
  */
 package superapp;
 
+import java.awt.HeadlessException;
 import javax.swing.JOptionPane;
 import sistemabancario.*;
 
@@ -27,6 +28,13 @@ public class TelaLogin extends javax.swing.JFrame {
         this.conta = conta;
         conta.contas.add(new Conta("1234", "gabriel", 500));
     }
+
+    public TelaLogin() throws HeadlessException {
+        initComponents();
+        jPanel2.requestFocusInWindow();
+    }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
